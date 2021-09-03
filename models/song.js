@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       models.name must match {foreignKey: nameId} inside()
       */
 			models.Song.belongsTo(models.Album, { foreignKey: albumId })
+			models.Song.belongsTo(models.Artist, { foreignKey: artistId })
 			/*
       with belongsToMany() association, 
       need a through: modelname, (name of the model storing connections)

@@ -10,14 +10,14 @@ module.exports = (sequelize, DataTypes) => {
 		static associate(models) {
 			// define association here
 			/*
-      with belongsTo() association, 
-      models.name must match {foreignKey: nameId} inside()
-      */
+			with belongsTo() association, 
+			models.name must match {foreignKey: nameId} inside()
+			*/
 			models.Album.belongsTo(models.Artist, { foreignKey: artistId })
 			/*
-      with hasMany() association, 
-      {foreignKey: nameId} must match models outside ()
-      */
+			with hasMany() association, 
+			{foreignKey: nameId} must match models outside ()
+			*/
 			models.Album.hasMany(models.Song, { foreignKey: albumId })
 		}
 	}
