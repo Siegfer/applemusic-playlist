@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       		with hasMany() association, 
       		{foreignKey: nameId} must match models outside ()
       		*/
-			models.Artist.hasMany(models.Album, { foreignKey: artistId })
-			models.Artist.hasMany(models.Song, { foreignKey: artistId })
+			models.Artist.hasMany(models.Album, { foreignKey: 'artistId' })
+			models.Artist.hasMany(models.Song, { foreignKey: 'artistId' })
 		}
 	}
 	Artist.init(

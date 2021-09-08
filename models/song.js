@@ -1,5 +1,7 @@
 'use strict'
+
 const { Model } = require('sequelize')
+
 module.exports = (sequelize, DataTypes) => {
 	class Song extends Model {
 		/**
@@ -13,16 +15,16 @@ module.exports = (sequelize, DataTypes) => {
       with belongsTo() association, 
       models.name must match {foreignKey: nameId} inside()
       */
-			models.Song.belongsTo(models.Album, { foreignKey: albumId })
-			models.Song.belongsTo(models.Artist, { foreignKey: artistId })
+			models.Song.belongsTo(models.Album, { foreignKey: 'albumId' })
+			models.Song.belongsTo(models.Artist, { foreignKey: 'artistId' })
 			/*
       with belongsToMany() association, 
       need a through: modelname, (name of the model storing connections)
-      {foreignKey: nameId} must match models.Name outside()
+      {foreignKey: namenpId} must match models.Name outside()
       */
 			models.Song.belongsToMany(models.User, {
-				through: Playlist,
-				foreignKey: songId
+				through: 'Playlist',
+				foreignKey: 'songId'
 			})
 		}
 	}

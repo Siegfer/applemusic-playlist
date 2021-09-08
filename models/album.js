@@ -1,5 +1,14 @@
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable no-tabs */
+/* eslint-disable indent */
+/* eslint-disable semi */
+/* eslint-disable strict */
+// eslint-disable-next-line semi
+
 'use strict'
+
 const { Model } = require('sequelize')
+
 module.exports = (sequelize, DataTypes) => {
 	class Album extends Model {
 		/**
@@ -13,12 +22,12 @@ module.exports = (sequelize, DataTypes) => {
 			with belongsTo() association, 
 			models.name must match {foreignKey: nameId} inside()
 			*/
-			models.Album.belongsTo(models.Artist, { foreignKey: artistId })
+			models.Album.belongsTo(models.Artist, { foreignKey: 'artistId' })
 			/*
 			with hasMany() association, 
 			{foreignKey: nameId} must match models outside ()
 			*/
-			models.Album.hasMany(models.Song, { foreignKey: albumId })
+			models.Album.hasMany(models.Song, { foreignKey: 'albumId' })
 		}
 	}
 	Album.init(

@@ -1,4 +1,7 @@
+/* eslint-disable no-tabs */
+/* eslint-disable semi */
 const express = require('express')
+
 const app = express()
 const ejsLayouts = require('express-ejs-layouts')
 const methodOverride = require('method-override')
@@ -10,7 +13,7 @@ app.use(ejsLayouts)
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: false }))
 
-//database
+// database
 const { Song, Artist, User, Album } = require('./models')
 
 app.get('/', (req, res) => {
@@ -28,8 +31,8 @@ app.get('/', (req, res) => {
 // })
 
 app.get('/:artist/albums', async (req, res) => {
-	let artist = req.params.artist
-	let fetchArtist = await Artist.findOne({
+	const { artist } = req.params
+	const fetchArtist = await Artist.findOne({
 		where: { name: artist },
 		include: [Album]
 	})
@@ -37,17 +40,17 @@ app.get('/:artist/albums', async (req, res) => {
 })
 // want one album and then all songs => get album
 app.get('/:artist/:albums', async (req, res) => {
-	let artist = req.params.artist
-	let albumInput = req.params.album
+	const { artist } = req.params
+	const albumInput = req.params.album
 
-	let fetchArtist = await Artist.findOne({
+	const fetchArtist = await Artist.findOne({
 		where: { name: artist },
 		include: [Album]
 	})
 
 	const albums = fetchArtist.Albums
 
-	let filterAlbums = albums.filter((alb) => {
+	const filterAlbums = albums.filter((alb) => {
 		// parse clean album
 		alb = alb.toJSON()
 		if (alb.name === albumInput) {
@@ -56,24 +59,23 @@ app.get('/:artist/:albums', async (req, res) => {
 	})
 
 	// get album out of array => there is only one album
-	let fetchAlbum = filterAlbums[0]
+	const fetchAlbum = filterAlbums[0]
 
-	let songs = fetchAlbum.getSongs()
+	const songs = fetchAlbum.getSongs()
 	console.log(songs)
 })
 
 app.get('/:artist/albums/songs', async (req, res) => {
-	let artist = req.params.artist
+	const { artist } = req.params
 
-	let fetchArtist = await Artist.findOne({
+	const fetchArtist = await Artist.findOne({
 		where: { name: artist },
 		include: [Album, Song]
 	})
 	const albums = fetchArtist.Albums
 	const songs = fetchArtist.Songs
-	console.log()
 })
 
 app.listen(PORT, () => {
-	console.log(`Sever is running on PORT`, PORT)
+	console.log('Sever is running on PORT', PORT)
 })
